@@ -1,10 +1,31 @@
 // IMPORT useState
-import React from 'react';
-import './styles.css';
+import React, { useState } from "react";
+import "./styles.css";
+import imagesArr from "./imageData";
 // IMPORT imageData.js AND STORE IT IN A VARIABLE CALLED imagesArr
 
 export default function App() {
-  // USE useState TO CREATE  [bigImage, setBigImage] 
+  // USE useState TO CREATE  [bigImage, setBigImage]
+  const [bigImage, setBigImage] = useState(imagesArr[0].img);
+  console.log(bigImage);
+  const handleClick = (image) => {
+    setBigImage(image);
+    image.selected
+  };
+
+  const images = imagesArr.map((image, index) => {
+    return (
+      <img
+        className="thumb"
+        src={image.img}
+        key={index}
+        alt={image.city}
+        onClick={() => handleClick(image.img)}
+
+     
+      />
+    );
+  });
   // AND SET IT TO THE IMAGE URL OF THE FIRST ELEMENT IN THE ARRAY
 
   // CREATE A HANDLE CLICK FUNCTION THAT ACCEPTS AN IMAGE URL
@@ -17,11 +38,12 @@ export default function App() {
     <div className="App">
       <h1>Cities Of The World</h1>
       <div id="wrapper">
-        <div id="thumbnails">
-          {/* RENDER THE IMAGES ARRAY  */}
-        </div>
+        <div id="thumbnails">{images}</div>
         {/* THE SRC IMAGE URL SHOULD BE SET TO THE VALUE THAT IS STORED IN bigImage */}
-        {/* <img src="" id="bigimage" alt='bigImage'/> */}
+        <div>
+          <img src={bigImage} id="bigimage" alt="bigImage" />
+          {/* <img src="" id="bigimage" alt='bigImage'/> */}
+        </div>
       </div>
     </div>
   );
