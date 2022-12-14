@@ -14,9 +14,11 @@ export default function App() {
   };
 
   const images = imagesArr.map((image, index) => {
+    //I added a ternary to className and added .border if the image was bigImage
+    //You could also add a style= property and do that there as well
     return (
       <img
-        className="thumb"
+        className={image.img === bigImage ? 'thumb border' : 'thumb'}
         src={image.img}
         key={index}
         alt={image.city}
